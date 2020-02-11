@@ -32,7 +32,7 @@ public extension NeuralNet {
     
     
     /// Attempts to initialize a `NeuralNet` from a file stored at the given URL.
-    public convenience init(url: URL) throws {
+    convenience init(url: URL) throws {
         // Read data
         let data = try Data(contentsOf: url)
         // Extract top-level object from data
@@ -96,7 +96,7 @@ public extension NeuralNet {
     
     
     /// Persists the `NeuralNet` to a file at the given URL.
-    public func save(to url: URL) throws {
+    func save(to url: URL) throws {
         // Create top-level JSON object
         let json: [String : Any] = [
             NeuralNet.layerNodeCountsKey : layerNodeCounts,

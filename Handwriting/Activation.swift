@@ -12,7 +12,7 @@ import Accelerate
 
 public extension NeuralNet {
     
-    public enum ActivationFunction {
+    enum ActivationFunction {
         
         // MARK: Hidden Activation Functions
         // These functions may be used for all hidden layers of a `NeuralNet`.

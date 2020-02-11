@@ -74,13 +74,15 @@ class MainView: UIView {
         outputTitleLabel.textAlignment = .center
         
         // Output
-        outputLabel.font = UIFont.systemFont(ofSize: 100, weight: UIFontWeightLight)
+        outputLabel.font = UIFont.systemFont(ofSize: 100, weight: UIFont.Weight.light)
+        outputLabel.textColor = UIColor.black
         outputLabel.textAlignment = .center
         
         // Confidence
         confidenceLabel.font = UIFont.systemFont(ofSize: 15)
         confidenceLabel.textAlignment = .center
-        
+        confidenceLabel.textColor = UIColor.black
+
     }
     
     /// Add subviews and set constraints.

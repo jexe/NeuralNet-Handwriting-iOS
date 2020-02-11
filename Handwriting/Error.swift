@@ -12,7 +12,7 @@ import Foundation
 public extension NeuralNet {
     
     /// Functions for calculating error on a validation set.
-    public enum ErrorFunction {
+    enum ErrorFunction {
         /// Mean squared error function.
         /// 1 / n * ∑( (a[i] - t[i]) * (a[i] - t[i]) )
         case meanSquared
@@ -73,7 +73,7 @@ public extension NeuralNet {
                     let realSet = real[start..<(start + cols)]
                     let labelSet = target[start..<(start + cols)]
                     // Compare max values of outputs and labels
-                    if realSet.index(of: realSet.max()!) != labelSet.index(of: labelSet.max()!) {
+                    if realSet.firstIndex(of: realSet.max()!) != labelSet.firstIndex(of: labelSet.max()!) {
                         // Incorrect answer; increment counter
                         incorrect += 1
                     }

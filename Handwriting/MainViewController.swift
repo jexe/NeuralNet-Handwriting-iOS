@@ -352,7 +352,7 @@ extension MainViewController {
     /// Extracts the output integer and confidence from the given neural network output.
     private func label(from output: [Float]) -> (label: Int, confidence: Float)? {
         guard let max = output.max() else { return nil }
-        return (output.index(of: max)!, max)
+        return (output.firstIndex(of: max)!, max)
     }
     
     /// Displays the given label and confidence in the output view.

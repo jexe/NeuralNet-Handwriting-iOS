@@ -107,7 +107,7 @@ public extension NeuralNet {
     /// This change may safely be performed at any time.
     ///
     /// - Parameter weights: A 2D array of weights corresponding to each layer in the network.
-    public func setWeights(_ weights: [[Float]]) throws {
+    func setWeights(_ weights: [[Float]]) throws {
         // TODO: ensure valid number of weights
         
         // Reset all weights in the network
@@ -115,7 +115,7 @@ public extension NeuralNet {
     }
     
     /// Returns an array of the network's current weights for each layer.
-    public func allWeights() -> [[Float]] {
+    func allWeights() -> [[Float]] {
         return cache.layerWeights
     }
     
@@ -168,7 +168,7 @@ public extension NeuralNet {
     /// - Returns: The full batch of outputs corresponding to the provided inputs.
     /// - Throws: An error if the number of batches or inputs per set are incorrect.
     @discardableResult
-    public func infer(_ inputs: [[Float]]) throws -> [[Float]] {
+    func infer(_ inputs: [[Float]]) throws -> [[Float]] {
         // Make sure the correct number of batches was provided
         guard inputs.count == batchSize else {
             throw Error.inference("Incorrect number of input sets provided: \(inputs.count). Expected: \(batchSize). The number of input sets must exactly match the network's batch size.")
@@ -206,7 +206,7 @@ public extension NeuralNet {
     /// - Throws: An error if an incorrect number of inputs is provided.
     /// - IMPORTANT: The number of inputs provided must exactly match the network's number of inputs (defined in its `Structure`).
     @discardableResult
-    public func infer(_ inputs: [Float]) throws -> [Float] {
+    func infer(_ inputs: [Float]) throws -> [Float] {
         // Ensure that the correct number of inputs is given
         guard inputs.count == layerNodeCounts[0] * batchSize else {
             throw Error.inference("Incorrect number of inputs provided: \(inputs.count). Expected: \(layerNodeCounts[0] * batchSize). The number of total inputs must exactly match the network's input size times its batch size.")
@@ -270,7 +270,7 @@ public extension NeuralNet {
     /// - Parameter labels: An array of label sets corresponding to the most recent minibatch applied for inference.
     /// - IMPORTANT: The labels must be given in the same order as the corresponding inputs that were provided during inference.
     /// - Throws: An error if a data inconsistency is detected.
-    public func backpropagate(_ labels: [[Float]]) throws {
+    func backpropagate(_ labels: [[Float]]) throws {
         // Ensure the correct number of sets is given
         guard labels.count == batchSize else {
             throw Error.train("Incorrect number of label sets provided: \(labels.count). Expected: \(batchSize). The number of sets in a minibatch must exactly match the network's batch size.")
@@ -297,7 +297,7 @@ public extension NeuralNet {
     /// - Parameter labels: A single set of labels corresponding to the most recent inference cycle,
     ///                     or a full minibatch of labels serialized into a single array.
     /// - Throws: An error if a data inconsistency is detected.
-    public func backpropagate(_ labels: [Float]) throws {
+    func backpropagate(_ labels: [Float]) throws {
         // Ensure that the correct number of labels was given
         guard labels.count == layerNodeCounts[numLayers - 1] * batchSize else {
             throw Error.train("Incorrect number of labels provided: \(labels.count). Expected: \(layerNodeCounts[numLayers - 1] * batchSize). The total number of labels must exactly match the network's output size times its batch size.")
@@ -477,9 +477,9 @@ public extension NeuralNet {
     ///                 or perform any other logic desired.
     /// - Returns: The total number of training epochs performed, and the final validation error.
     /// - Throws: An error if invalid data is provided. Checks are performed in advance to avoid problems during the training cycle.
-    public func train(_ data: Dataset, maxEpochs: Int,
-                      errorThreshold: Float, errorFunction: ErrorFunction,
-                      epochCallback: ((_ epoch: Int, _ error: Float) -> Bool)?) throws -> (epochs: Int, error: Float) {
+    func train(_ data: Dataset, maxEpochs: Int,
+               errorThreshold: Float, errorFunction: ErrorFunction,
+               epochCallback: ((_ epoch: Int, _ error: Float) -> Bool)?) throws -> (epochs: Int, error: Float) {
         // Ensure valid error threshold
         guard errorThreshold > 0 else {
             throw Error.train("Training error threshold must be greater than zero.")
